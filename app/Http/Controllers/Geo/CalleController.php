@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Geo;
 
 use App\Calle;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CalleController extends Controller
 {
@@ -14,7 +15,10 @@ class CalleController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'result' => 'OK', 
+            'response' => Calle::orderBy('nombre')->get()
+        ]);
     }
 
     /**
@@ -46,7 +50,10 @@ class CalleController extends Controller
      */
     public function show(Calle $calle)
     {
-        //
+        return response()->json([
+            'result' => 'OK', 
+            'response' => $calle
+        ]);
     }
 
     /**

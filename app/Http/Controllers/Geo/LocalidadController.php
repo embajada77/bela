@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Geo;
 
 use App\Localidad;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class LocalidadController extends Controller
 {
@@ -14,7 +15,10 @@ class LocalidadController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'result' => 'OK', 
+            'response' => Localidad::orderBy('nombre')->get()
+        ]);
     }
 
     /**
@@ -46,7 +50,10 @@ class LocalidadController extends Controller
      */
     public function show(Localidad $localidad)
     {
-        //
+        return response()->json([
+            'result' => 'OK', 
+            'response' => $localidad
+        ]);
     }
 
     /**

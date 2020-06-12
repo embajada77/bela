@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Geo;
 
 use App\Distrito;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DistritoController extends Controller
 {
@@ -14,7 +15,10 @@ class DistritoController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'result' => 'OK', 
+            'response' => Distrito::orderBy('nombre')->get()
+        ]);
     }
 
     /**
@@ -46,7 +50,10 @@ class DistritoController extends Controller
      */
     public function show(Distrito $distrito)
     {
-        //
+        return response()->json([
+            'result' => 'OK', 
+            'response' => $distrito
+        ]);
     }
 
     /**

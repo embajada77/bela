@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Geo;
 
 use App\Pais;
-use App\Persona;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -77,7 +76,8 @@ class PaisController extends Controller
      */
     public function update(Request $request, Pais $pais)
     {
-        $pais->fill($request);
+        abort(403);
+        # $pais->fill($request);
     }
 
     /**

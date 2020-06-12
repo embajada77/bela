@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Geo;
 
 use App\Provincia;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProvinciaController extends Controller
 {
@@ -14,7 +15,10 @@ class ProvinciaController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'result' => 'OK', 
+            'response' => Provincia::orderBy('nombre')->get()
+        ]);
     }
 
     /**
@@ -46,7 +50,10 @@ class ProvinciaController extends Controller
      */
     public function show(Provincia $provincia)
     {
-        //
+        return response()->json([
+            'result' => 'OK', 
+            'response' => $provincia
+        ]);
     }
 
     /**
