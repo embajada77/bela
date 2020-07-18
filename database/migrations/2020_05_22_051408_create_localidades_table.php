@@ -28,7 +28,8 @@ class CreateLocalidadesTable extends Migration
             $table->string('categoria')->default('localidad')
                 ->comment('Nombre con el que se conoce a la division politica.');
 
-            $table->foreignId('distrito_id')->constrained('distritos')
+            $table->foreignId('distrito_id')
+                ->constrained('distritos')
                 ->comment('Distrito al que pertenece la localidad.');
             
             # INDEX 

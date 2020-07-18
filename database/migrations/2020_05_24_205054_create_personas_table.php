@@ -27,9 +27,11 @@ class CreatePersonasTable extends Migration
             $table->date('nacimiento')->nullable();
 
             $table->string('documento')->index();
-            $table->foreignId('tipo_documento_id')->constrained('tipos_documentos')->default(TipoDocumento::DNI);
+            $table->foreignId('tipo_documento_id')->default(TipoDocumento::DNI)
+                ->constrained('tipos_documentos');
 
-            $table->foreignId('genero_id')->constrained('generos');
+            $table->foreignId('genero_id')
+                ->constrained('generos');
         });
     }
 

@@ -37,76 +37,61 @@ class TipoTelefono extends BaseModel
     protected $hidden = [];
 
     # === FOREING KEYS ============================================================================
-        public function telefonos()
-        {
-            return $this->hasMany('App\Telefono','tipo_telefono_id','id');
-        }
+    public function telefonos()
+    {
+        return $this->hasMany('App\Telefono','tipo_telefono_id','id');
+    }
     # =============================================================================================
 
     # === MUTATORS ================================================================================
     # =============================================================================================
 
     # === ACCESSORS & VIRTUAL ATTRIBUTES ==========================================================
-        public function getFullNameAttribute() 
-        {
-            return ucwords($this->nombre);
+    public function getFullNameAttribute() 
+    {
+        return ucwords($this->nombre);
+    }
+
+    public function getIconoAttribute()
+    {
+        switch ($this->id) {
+            case TipoTelefono::CELULAR:
+                $icono = 'glyphicon glyphicon-phone';
+                break;
+            case TipoTelefono::FIJO:
+                $icono = 'glyphicon glyphicon-phone-alt';
+                break;
+            case TipoTelefono::SKYPE:
+                $icono = 'fa fa-skype';
+                break;
+            case TipoTelefono::TRABAJO:
+                $icono = 'glyphicon glyphicon-earphone';
+                break;
+            case TipoTelefono::FAX:
+                $icono = 'fa fa-fax';
+                break;
+            default:
+                $icono = 'glyphicon glyphicon-earphone';
+                break;
         }
 
-        public function getIconoAttribute()
-        {
-            switch ($this->id) {
-                case TipoTelefono::CELULAR:
-                    $icono = 'glyphicon glyphicon-phone';
-                    break;
-                case TipoTelefono::FIJO:
-                    $icono = 'glyphicon glyphicon-phone-alt';
-                    break;
-                case TipoTelefono::SKYPE:
-                    $icono = 'fa fa-skype';
-                    break;
-                case TipoTelefono::TRABAJO:
-                    $icono = 'glyphicon glyphicon-earphone';
-                    break;
-                case TipoTelefono::FAX:
-                    $icono = 'fa fa-fax';
-                    break;
-                default:
-                    $icono = 'glyphicon glyphicon-earphone';
-                    break;
-            }
-
-            return $icono;
-        }
+        return $icono;
+    }
     # =============================================================================================
 
     # === QUERYS ==================================================================================
-        public static function listByFullName()
-        {
-            $items  = TiposTelefonos::all();
-            $key    = 'id';
-            $value  = 'full_name';
+    public static function listByFullName()
+    {
+        $items = static::all();
 
-            return TiposTelefonos::getListFields($items,$key,$value);
-        }
+        return static::getListFields($items,'id','full_name','full_name');
+    }
     # =============================================================================================
 
     # === REPOSITORIO =============================================================================
-        public function getCanDropThisAttribute()
-        {
-            return ($this->telefonos->count() == 0);
-        }
-
-        protected function dropRelationships( & $mensaje_error, bool $force = false)
-        {
-            $resuelto = true;
-            
-            foreach ($this->telefonos as $telefono) {
-                if ( ! $resuelto) { break; }
-
-                $resuelto = $telefono->dropThis($mensaje_error,$force);
-            }
-
-            return $resuelto;
-        }
+    public function getCanDropThisAttribute()
+    {
+        return ($this->telefonos->count() == 0);
+    }
     # =============================================================================================
 }

@@ -101,16 +101,16 @@ class Localidad extends DivisionGeografica
     # =============================================================================================
 
     # === REPOSITORIO =============================================================================
-        public function firstOrCreateCalle($calle_nombre)
+        public function firstOrCreateCalle($nombre)
         {
             $calle = null;
 
-            if ($calle_nombre != '') {
+            $nombre = strtolower(trim($nombre));
 
-                $calle_nombre = strtolower(trim($calle_nombre));
+            if ($nombre != '') {
 
                 $calle = $this->calles()->updateOrCreate([
-                    'nombre' => $calle_nombre,
+                    'nombre' => $nombre,
                 ]);
             }
 

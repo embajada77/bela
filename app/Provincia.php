@@ -77,9 +77,9 @@ class Provincia extends DivisionGeografica
         {
             $distrito = null;
 
-            if ($nombre != '') {
+            $nombre = mb_strtolower(trim($nombre));
 
-                $nombre = mb_strtolower(trim($nombre));
+            if ($nombre != '') {
                 
                 $distrito = $this->distritos()->updateOrCreate([
                     'nombre' => $nombre,

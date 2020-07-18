@@ -26,8 +26,8 @@ class CreateDomiciliosTable extends Migration
             $table->string('dpto')->default('');
             $table->longText('extra')->default('');
             
-            $table->foreignId('calle_id')->constrained('calles')
-                ->default(1)
+            $table->foreignId('calle_id')
+                ->constrained('calles')
                 ->comment('Calle a la que pertenece el domicilio.');
             
             # INDEX 

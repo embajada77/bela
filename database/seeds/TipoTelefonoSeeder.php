@@ -12,7 +12,6 @@ class TipoTelefonoSeeder extends Seeder
     public function run()
     {
         $this->command->info('Cargando tipos de documentos.');
-
         $this->tiposTelefonos();
     }
 

@@ -41,17 +41,15 @@ class BaseModel extends Model
          *      So, both "$key" and "$value" are not attributes from the source "$items", 
          *      just the name of them.
          */
-        protected static function getListFields($items,$key,$value)
+        protected static function getListFields($items,$key,$value, $sort_by = null)
         {
-            $select_fields = array();
-
-            foreach ( $items as $item ) {
-
-                $my_key     = $item->$key;
-                $my_value   = $item->$value;
-
-                $select_fields[$my_key] = $my_value;
+            if ($sort_by) {
+                $items = $items->sortBy($sort_by);
             }
+
+            $select_fields = $items->keyBy($key)->map(function ($an_item,$a_key) use ($value) {
+                return $an_item->$value;
+            });
 
             return $select_fields;
         }
@@ -94,7 +92,8 @@ class BaseModel extends Model
                     $this->refresh();
 
                     if ($resuelto) {
-                        $this->forceDelete();
+                        // $this->forceDelete();
+                        $this->delete();
                     } else {
                         DB::rollback();
                     }

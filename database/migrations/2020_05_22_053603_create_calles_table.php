@@ -26,7 +26,8 @@ class CreateCallesTable extends Migration
             // $table->foreignId('tipo_id')->constrained('tipos_calles')
             //     ->comment('Tipo de calle');
 
-            $table->foreignId('localidad_id')->constrained('localidades')
+            $table->foreignId('localidad_id')
+                ->constrained('localidades')
                 ->comment('Localidad a la que pertenece la calle.');
 
             # INDEX 

@@ -25,7 +25,8 @@ class CreateDistritosTable extends Migration
             $table->string('categoria')->default('distrito')
                 ->comment('Nombre con el que se conoce a la division politica.');
 
-            $table->foreignId('provincia_id')->constrained('provincias')
+            $table->foreignId('provincia_id')
+                ->constrained('provincias')
                 ->comment('Provincia a la que pertenece el distrito.');
             
             # INDEX 

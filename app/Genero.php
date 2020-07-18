@@ -83,6 +83,18 @@ class Genero extends BaseModel
     # =============================================================================================
 
     # === QUERYS ==================================================================================
+        public function tiposDocumentos($pais_id = null)
+        {
+            return TipoDocumento::when($pais_id, function ($query, $pais_id) {
+                    return $query->where('pais_id',$pais_id);
+                })
+                ->where(function($q) {
+                    $q->whereNull('genero_id')
+                        ->orWhere('genero_id',$this->id);
+                })
+                ->get();
+        }
+
         public static function listTipoPersonaByFullName($personeria='')
         {
             $items = array(

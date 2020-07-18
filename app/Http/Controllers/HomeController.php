@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Genero;
+use App\TipoDocumento;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

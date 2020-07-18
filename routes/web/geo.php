@@ -5,7 +5,7 @@ Route::get('/search/localidades',[
     'uses'  => 'geo\LocalidadController@search'
 ]);
 
-Route::group(['prefix' => 'geo'], function () {
+Route::group(['prefix' => 'geo', 'middleware' => ['auth', 'owner']], function () {
 
     Route::resource('/paises','geo\PaisController',['names' => [
         'index' => 'geo.paises.index',

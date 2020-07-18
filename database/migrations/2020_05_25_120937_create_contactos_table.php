@@ -28,7 +28,8 @@ class CreateContactosTable extends Migration
             $table->unsignedBigInteger('contactable_id')->unsigned()->index();
             $table->string('contactable_type')->index();
 
-            $table->foreignId('persona_id')->constrained('personas')->index();
+            $table->foreignId('persona_id')->index()
+                ->constrained('personas');
 
             # INDEX
 

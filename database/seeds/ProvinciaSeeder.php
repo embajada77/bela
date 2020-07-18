@@ -45,7 +45,7 @@ class ProvinciaSeeder extends Seeder
             ["id" => 21, "nombre" => "santiago del estero", "alias" => "sgo", "iso" => "AR-G", "categoria" => $categoria, "pais_id" => $pais_id],
             ["id" => 22, "nombre" => "tierra del fuego", "alias" => "tdf", "iso" => "AR-V", "categoria" => $categoria, "pais_id" => $pais_id],
             ["id" => 23, "nombre" => "tucuman", "alias" => "tuc", "iso" => "AR-T", "categoria" => $categoria, "pais_id" => $pais_id],
-            ["id" => 24, "nombre" => "ciudad autonoma de bs. as.", "alias" => "caba", "iso" => "AR-C", "categoria" => "ciudad autonoma", "pais_id" => $pais_id],
+            ["id" => 24, "nombre" => "ciudad autonoma de bs. as.", "alias" => "caba", "iso" => "AR-C", "categoria" => "Ciudad Autónoma", "pais_id" => $pais_id],
         ]);
     }
 

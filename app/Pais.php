@@ -7,6 +7,7 @@ use DB;
 class Pais extends DivisionGeografica
 {
     const ARGENTINA = 1;
+    const CHILE = 46;
 
     /**
      * The database table used by the model.
@@ -118,18 +119,13 @@ class Pais extends DivisionGeografica
     # =============================================================================================
 
     # === QUERYS ==================================================================================
-        public static function listByFullName($pais_id='')
+        public static function listByFullName($pais_id = null)
         {
-            if ($pais_id != '') {
-                $items = Pais::where('id',$pais_id)->get();
-            } else {
-                $items = Pais::orderBy('nombre')->get();
-            }
-                        
-            $key = 'id';
-            $value = 'full_name';
+            $items = Pais::when($pais_id, function ($q) use ($pais_id) {
+                    return $q->where('id','=',$pais_id);
+                })->get();
 
-            return Pais::getListFields($items,$key,$value);
+            return static::getListFields($items,'id','full_name','full_name');
         }
     # =============================================================================================
 
@@ -138,12 +134,12 @@ class Pais extends DivisionGeografica
         {
             $provincia = null;
 
-            if ($nombre != '') {
+            $nombre     = mb_strtolower(trim($nombre));
+            $alias      = mb_strtolower(trim($alias));
+            $iso        = mb_strtolower(trim($iso));
+            $categoria  = mb_strtolower(trim($categoria));
 
-                $nombre     = mb_strtolower(trim($nombre));
-                $alias      = mb_strtolower(trim($alias));
-                $iso        = mb_strtolower(trim($iso));
-                $categoria  = mb_strtolower(trim($categoria));
+            if ($nombre != '') {
                 
                 $provincia = $this->provincias()->updateOrCreate(
                     ['nombre' => $nombre],

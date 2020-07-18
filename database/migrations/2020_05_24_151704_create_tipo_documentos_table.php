@@ -24,12 +24,15 @@ class CreateTipoDocumentosTable extends Migration
             $table->string('nombre');
             $table->string('alias')->default('');
             $table->longText('descripcion')->default('');
+            
             $table->enum('personeria', ['física','jurídica'])->nullable();
             
-            $table->foreignId('genero_id')->nullable()->constrained('generos')
+            $table->foreignId('genero_id')->nullable()
+                ->constrained('generos')
                 ->comment('Genero asociado al tipo de documento. Podría ser ninguno.');
 
-            $table->foreignId('pais_id')->constrained('paises')
+            $table->foreignId('pais_id')
+                ->constrained('paises')
                 ->comment('Pais al que pertenece la tipo de documento.');
         });
     }

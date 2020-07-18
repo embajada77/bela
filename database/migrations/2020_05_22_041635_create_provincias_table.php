@@ -29,7 +29,8 @@ class CreateProvinciasTable extends Migration
             $table->string('categoria')->default('provincia')
                 ->comment('Nombre con el que se conoce a la division politica.');
 
-            $table->foreignId('pais_id')->constrained('paises')
+            $table->foreignId('pais_id')
+                ->constrained('paises')
                 ->comment('País al que pertenece la provincia.');
 
             # INDEX 
