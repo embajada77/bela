@@ -16,7 +16,7 @@ trait TraitDistrito {
         return ($this->distrito) ? $this->distrito->provincia_id : null;
     }
 
-    public function getdistritoNombreAttribute()
+    public function getDistritoNombreAttribute()
     {
         return ($this->distrito) ? $this->distrito->nombre : null;
     }

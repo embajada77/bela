@@ -24,6 +24,8 @@ class CreateTipoDocumentosTable extends Migration
             $table->string('nombre');
             $table->string('alias')->default('');
             $table->longText('descripcion')->default('');
+            $table->string('preg_match')->default('');
+            $table->string('preg_replace')->default('');
             
             $table->enum('personeria', ['física','jurídica'])->nullable();
             

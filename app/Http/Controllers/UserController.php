@@ -30,7 +30,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Crear un nuevo Usuario ';
+
+        return view('admin.users.show',compact('user','title'));
     }
 
     /**

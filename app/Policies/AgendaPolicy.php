@@ -16,10 +16,6 @@ class AgendaPolicy
         if ($user->isSuperAdmin()) {
             return Response::allow();
         }
-
-    // return $user->id === $post->user_id
-    //             ? Response::allow()
-    //             : Response::deny('You do not own this post.');
     }
 
     /**
@@ -30,7 +26,7 @@ class AgendaPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        $user->isAn('organizer');
     }
 
     /**

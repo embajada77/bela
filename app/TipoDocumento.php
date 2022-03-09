@@ -25,6 +25,7 @@ class TipoDocumento extends BaseModel
         'nombre', 
     	'alias', 
         'descripcion', 
+        'patron', 
         'genero_id', 
         'pais_id' 
     ];
@@ -142,7 +143,7 @@ class TipoDocumento extends BaseModel
             return $puedo_cambiar;
         }
 
-        public static function listByFullName($pais_id='',$genero_id='',$personeria='')
+        public static function listByFullName($pais_id = null, $genero_id = null, $personeria = null)
         {
 
             $genero = Genero::find($genero_id);

@@ -16,7 +16,7 @@ class AgendaController extends Controller
     public function index()
     {
         $agendas = Agenda::query()
-            // ->unless(auth()->user()->isAn('admin'), function ($q) {
+            // ->unless(auth()->user()->can('view-all',Agenda::class), function ($q) {
             //     $q->where('centro_id', auth()->user()->centro_id);
             // })
             ->get();

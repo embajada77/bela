@@ -30,8 +30,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->unsignedBigInteger('userable_id')->unsigned()->index();
-            $table->string('userable_type')->index();
+            $table->unsignedBigInteger('userable_id')->unsigned()->index()->nullable();
+            $table->string('userable_type')->index()->nullable();
         });
     }
 

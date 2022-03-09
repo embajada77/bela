@@ -8,4 +8,9 @@ trait TraitPais {
     {
         return ($this->pais) ? $this->pais->nombre : null;
     }
+
+    public function getPaisAliasAttribute()
+    {
+        return ($this->pais) ? $this->pais->alias : null;
+    }
 }

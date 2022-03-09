@@ -35,6 +35,28 @@ function calcularPorcentaje($total,$valor,$acumulado = 0)
     return $porcentaje;
 }
 
+function formatoMoneda($valor, $prefijo='$ ', $postfijo='.-', $decimales=2, $separador_decimal=",", $separador_mil=".")
+{
+    $monto_texto = '';
+
+    $monto_texto .= $prefijo;
+    $monto_texto .= number_format($valor,$decimales,$separador_decimal,$separador_mil);
+    $monto_texto .= $postfijo;
+
+    return $monto_texto;
+}
+
+function formatoPorcentaje($valor, $prefijo='', $postfijo=' %', $decimales=2, $separador_decimal=",", $separador_mil=".")
+{
+    $monto_texto = '';
+
+    $monto_texto .= $prefijo;
+    $monto_texto .= number_format($valor,$decimales,$separador_decimal,$separador_mil);
+    $monto_texto .= $postfijo;
+
+    return $monto_texto;
+}
+
 /**
  * Si es el caso de que estoy calculando el porcentaje que representan varios datos
  * y por redondeo la cuenta supera el 100%, es necesario restar el excedente al porcentaje.

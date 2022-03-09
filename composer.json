@@ -16,6 +16,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "silber/bouncer": "v1.0.0-rc.8",
+        "spatie/calendar-links": "^1.4",
+        "sssurii/laravel-ics": "^0.2.0",
         "twbs/bootstrap": "4.5.0"
     },
     "require-dev": {
@@ -44,7 +46,7 @@
             "database/factories"
         ],
         "files": [
-            "app/Helpers/strings.php" 
+            "app/Helpers/helpers.php" 
         ]
     },
     "autoload-dev": {

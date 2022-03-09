@@ -38,8 +38,8 @@ class Agenda extends BaseModel
     protected $hidden = [];
 
     protected $casts = [
-        'fecha_inicio' => 'dateTime',
-        'fecha_fin' => 'dateTime',
+        'fecha_inicio' => 'datetime',
+        'fecha_fin' => 'datetime',
     ];
     
     # === FOREING KEYS ============================================================================
@@ -75,19 +75,24 @@ class Agenda extends BaseModel
         return $this->fecha_inicio->format('H:i');
     }
 
-    public function getHoraFinAttribute()
-    {
-        return $this->fecha_fin->format('H:i');
-    }
-
     public function getDiaFinAttribute()
     {
         return $this->fecha_fin->format('d-m-Y');
     }
 
+    public function getHoraFinAttribute()
+    {
+        return $this->fecha_fin->format('H:i');
+    }
+
     public function getDiasDuracionAttribute()
     {
         return $this->fecha_fin->diffInDays($this->fecha_inicio);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->dia . ' ' . $this->centro->full_name;
     }
     # =============================================================================================
 

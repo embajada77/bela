@@ -8,7 +8,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Agenda::class, function (Faker $faker) {
 	
-	// $carbon = Carbon::createFromFormat('Y-m-d','2020-07-06');
 	$fecha_inicio = Carbon::now()->addDays(rand(1,10))->setTime(8,0,0);
 	$fecha_fin = $fecha_inicio->copy();
 	$fecha_fin->addHours(rand(8,12));

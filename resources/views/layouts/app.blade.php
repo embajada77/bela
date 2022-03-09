@@ -57,6 +57,7 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
+                                {{--  
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                     @csrf
 
@@ -64,6 +65,7 @@
                                         {{ __('Logout') }}
                                     </button>
                                 </form>
+                                --}}
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -82,9 +84,25 @@
                 </div>
             </div>
         </nav>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <small>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                        @yield('breadcrumb')
+                    </ol>
+                </nav>
+            </small>
+        </div>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>

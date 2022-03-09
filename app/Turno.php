@@ -127,6 +127,31 @@ class Turno extends BaseModel
 
         return $fecha_fin;
     }
+    
+    public function getDiaAttribute()
+    {
+        return $this->fecha_inicio->format('d-m-Y');
+    }
+
+    public function getHoraAttribute()
+    {
+        return $this->fecha_inicio->format('H:i');
+    }
+
+    public function getDiaFinAttribute()
+    {
+        return $this->fecha_fin->format('d-m-Y');
+    }
+
+    public function getHoraFinAttribute()
+    {
+        return $this->fecha_fin->format('H:i');
+    }
+
+    public function getDiasDuracionAttribute()
+    {
+        return $this->fecha_fin->diffInDays($this->fecha_inicio);
+    }
     # =============================================================================================
 
     # === REPOSITORIO =============================================================================

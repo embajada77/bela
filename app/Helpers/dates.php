@@ -234,7 +234,7 @@ function filtrar_fecha($fecha)
  *
  * @return el nombre del dia a partir de una fecha dada
  */
-protected function nombre_dia_semana($fecha) 
+function nombre_dia_semana($fecha) 
 {
     if (strpos($fecha, '/') !== FALSE){
        $fecha = tr_replace('/','-',$fecha);

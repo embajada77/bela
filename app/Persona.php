@@ -2,9 +2,11 @@
 
 namespace App;
 
-use Illuminate\Support\Collection;
+use App\Casts\Document as DocumentCast;
+use App\Casts\PersonName as PersonNameCast;
 use Carbon\Carbon;
 use DB;
+use Illuminate\Support\Collection;
 
 class Persona extends BaseModel
 {
@@ -14,6 +16,7 @@ class Persona extends BaseModel
      * @var string
      */
     protected $table = 'personas';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +25,7 @@ class Persona extends BaseModel
     protected $fillable = [
         'nombre', 
         'apellido', 
-        'nacimiento',
+        'nacimiento', 
     ];
 
     /**
@@ -36,6 +39,8 @@ class Persona extends BaseModel
     
     protected $casts = [
         'nacimiento' => 'date',
+        'full_document' => DocumentCast::class,
+        'full_name' => PersonNameCast::class,
     ];
 
     /**
@@ -44,13 +49,8 @@ class Persona extends BaseModel
      * @var array
      */
     protected $appends = [
+        'full_document',
         'full_name',
-        'minimal_name',
-        'reduce_name',
-        'inverse_full_name',
-        'inverse_minimal_name',
-        'inverse_reduce_name',
-        'full_documento',
         'nacionalidad',
         'edad',
     ];
@@ -109,91 +109,15 @@ class Persona extends BaseModel
     # =============================================================================================
 
     # === ACCESSORS & VIRTUAL ATTRIBUTES ==========================================================
-        # ================================= Nombre
-	        public function getNombreAttribute($attribute)
-	        {
-	            return specialUcwords($attribute);
-	        }
-
-	        public function getApellidoAttribute($attribute)
-	        {
-	            return specialUcwords($attribute);
-	        }
-
-            public function getAbbrNameAttribute() 
-            {
-                return firstWordThenAbbr($this->nombre);
-            }
-
-            public function getAbbrSurnameAttribute() 
-            {
-                return firstWordThenAbbr($this->apellido);
-            }
-
-            public function getFirstNameAttribute() 
-            {
-                $nombres = explode(' ',$this->nombre);
-
-                return $nombres[0];
-            }
-
-            public function getFirstSurnameAttribute() 
-            {
-                $apellidos = explode(' ',$this->apellido);
-
-                return $apellidos[0];
-            }
-
-            public function getFullNameAttribute() 
-            {
-                return trim($this->nombre . ' ' . $this->apellido);
-            }
-
-            public function getMinimalNameAttribute() 
-            {
-                return trim($this->abbr_name . ' ' . $this->abbr_surname);
-            }
-
-            public function getReduceNameAttribute() 
-            {
-                return trim($this->first_name . ' ' . $this->first_surname);
-            }
-
-            public function getInverseFullNameAttribute() 
-            {
-                return ($this->apellido != '') ? $this->apellido . ', ' . $this->nombre : $this->nombre;
-            }
-
-            public function getInverseMinimalNameAttribute() 
-            {
-                return ($this->apellido != '') ? $this->abbr_surname . ', ' . $this->abbr_name : $this->abbr_name;
-            }
-
-            public function getInverseReduceNameAttribute() 
-            {
-                return ($this->apellido != '') ? $this->first_surname . ', ' . $this->first_name : $this->first_name;
-            }
-        # =================================
-
         # ================================= Nacimiento
             public function getEdadAttribute()
             {
 	            return ($this->nacimiento) ? $this->nacimiento->age : 0;
             }
 
-            public function getFullDocumentoAttribute()
-            {
-            	return ($this->tipo_documento) ? $this->tipo_documento->alias . ' ' . $this->documento : $this->documento;
-            }
-
             public function getNacionalidadAttribute() 
             {
                 return ($this->pais) ? $this->pais->nombre : '';
-            }
-
-            public function getNacionalidadIdAttribute() 
-            {
-                return $this->pais_id;
             }
 
             public function getPaisAttribute() 
@@ -215,7 +139,7 @@ class Persona extends BaseModel
 
             public function getPersonaFisicaAttribute()
             {
-                return ($this->genero_id == Genero::PERSONA_FISICA);
+                return ($this->genero_id != Genero::PERSONA_JURIDICA);
             }
         # =================================
 
@@ -260,23 +184,8 @@ class Persona extends BaseModel
                     ->where("documento",'=',$token_filtrado)
                     ->orWhere(DB::raw("LOWER(CONCAT_WS(' ',TRIM(nombre),TRIM(apellido)))"),'LIKE','%'.$token_filtrado.'%')
                     ->orWhere(DB::raw("LOWER(CONCAT_WS(' ',TRIM(apellido),TRIM(nombre)))"),'LIKE','%'.$token_filtrado.'%')
-                    ->orWhere(DB::raw("LOWER(TRIM(nombre))"),'LIKE','%'.$token_filtrado.'%')
-                    ->orWhere(DB::raw("LOWER(TRIM(apellido))"),'LIKE','%'.$token_filtrado.'%')
-                    // ->orWhereHas('paciente',function($q) use ($token_filtrado) {
-                    //     $q->where('carnet','=',$token_filtrado);
-                    // })
-                    // ->orWhereHas('club',function($q) use ($token_filtrado) {
-                    //     $q->where(DB::raw("LOWER(TRIM(nombre))"),'LIKE','%'.$token_filtrado.'%')
-                    //         ->orWhere(DB::raw("LOWER(TRIM(alias))"),'LIKE','%'.$token_filtrado.'%');
-                    // })
-                    ->get()
-                    ->sort( function($item_a,$item_b) {
-
-                        $inverse_full_name_a = str_replace(",","",$item_a->inverse_full_name);
-                        $inverse_full_name_b = str_replace(",","",$item_b->inverse_full_name);
-
-                        return strcmp($inverse_full_name_a,$inverse_full_name_b);
-                    });
+                    ->orderByRaw("CONCAT(apellido,', ',nombre) ASC")
+                    ->get();
             } else {
                 $personas = new Collection;
             }

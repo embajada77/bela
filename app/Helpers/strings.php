@@ -74,33 +74,26 @@ function firstWordThenAbbr( string $value=''): string
     return trim($my_string);
 }
 
-function iniciales( string $value=''): string
+function iniciales( string $frase = ''): string
 {
     $my_string = '';
 
-    $palabras = explode(' ',$value);
+    $palabras = explode(' ',$frase);
 
     $cantidad = count($palabras);
 
     for ($i=0; $i < $cantidad; $i++) { 
         if ($palabras[$i] != '') {
-	        //if ($my_string != '') {
-	            if (( ! esConector($palabras[$i])) && ( ! is_numeric($palabras[$i]))) {
-	                $primer_letra = substr($palabras[$i],0,1);
+            if (( ! esConector($palabras[$i])) && ( ! is_numeric($palabras[$i]))) {
+                $primer_letra = substr($palabras[$i],0,1);
 
-	                $my_string .= mb_strtoupper($primer_letra);
-	                $my_string .= '.';
-	            } else {
-	                $my_string .= ' ';
-	                $my_string .= mb_strtolower($palabras[$i]);
-	                $my_string .= ' ';
-	            }
-	        //} else {
-	        //    if ( ! esConector($palabras[$i])) {
-	        //        $my_string .= $palabras[$i];
-	        //        if ($cantidad > 1) { $my_string .= ' '; }
-	        //    }
-	        //}
+                $my_string .= mb_strtoupper($primer_letra);
+                $my_string .= '.';
+            } else {
+                $my_string .= ' ';
+                $my_string .= mb_strtolower($palabras[$i]);
+                $my_string .= ' ';
+            }
         }
     }
 

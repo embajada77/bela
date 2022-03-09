@@ -28,7 +28,7 @@ class Admin
 
     protected function authorizedUser()
     {
-        return optional(auth()->user())->is_admin;
+        return optional(auth()->user())->isAn('admin');
         // return (auth()->check() && auth()->user()->is_admin);
     }
 }

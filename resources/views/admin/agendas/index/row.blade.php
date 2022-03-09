@@ -45,7 +45,7 @@
 
 	<td class="text-center">
 		@can('view',$agenda)
-			<a href="{{ route('agendas.show',$agenda) }}" class="text-info" data-toggle="tooltip" title="Click para ver los datos del agenda.">
+			<a href="{{ route('agendas.show',$agenda) }}" class="text-info" data-toggle="tooltip" title="Ver los datos de la agenda.">
 				<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
 				<small>IR</small>
 			</a>

@@ -1,6 +1,6 @@
 <?php
 
-include_once('integers.php');
+include_once('numbers.php');
 include_once('strings.php');
 include_once('dates.php');
 

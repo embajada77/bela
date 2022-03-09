@@ -22,6 +22,7 @@
                     <br>
                     @admin / <a href="{{ route('users.index') }}"><small>Usuarios</small></a> @endadmin
                     @owner / <a href="{{ route('geo.paises.index') }}"><small>Paises</small></a> @endowner
+                    @owner / <a href="{{ route('personas.index') }}"><small>Personas</small></a> @endowner
                     / <a href="{{ route('agendas.index') }}"><small>Agendas</small></a>
                 </div>
             </div>

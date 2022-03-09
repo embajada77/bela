@@ -13,12 +13,17 @@ class PaisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json([
-            'result' => 'OK', 
-            'response' => Pais::orderBy('nombre')->get()
-        ]);
+        if ($request->wantsJson()) {
+
+            return response()->json([
+                'result' => 'OK', 
+                'response' => Pais::orderBy('nombre')->get()
+            ]);
+        } else {
+            dd('GIL');
+        }
     }
 
     /**

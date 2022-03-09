@@ -2,12 +2,12 @@
 
 Route::get('/search/localidades',[
     'as'    => 'geo.localidades.search',
-    'uses'  => 'geo\LocalidadController@search'
+    'uses'  => 'Geo\LocalidadController@search'
 ]);
 
 Route::group(['prefix' => 'geo', 'middleware' => ['auth', 'owner']], function () {
 
-    Route::resource('/paises','geo\PaisController',['names' => [
+    Route::resource('/paises','Geo\PaisController',['names' => [
         'index' => 'geo.paises.index',
         'create' => 'geo.paises.create',
         'update' => 'geo.paises.update',
@@ -29,7 +29,7 @@ Route::group(['prefix' => 'geo', 'middleware' => ['auth', 'owner']], function ()
         })->name('geo.paises.localidades');
 	});
 
-    Route::resource('/provincias','geo\ProvinciaController',['names' => [
+    Route::resource('/provincias','Geo\ProvinciaController',['names' => [
         'index' => 'geo.provincias.index',
         'create' => 'geo.provincias.create',
         'update' => 'geo.provincias.update',
@@ -41,7 +41,7 @@ Route::group(['prefix' => 'geo', 'middleware' => ['auth', 'owner']], function ()
         'provincias' => 'provincia'
     ]);
 
-    Route::resource('/distritos','geo\DistritoController',['names' => [
+    Route::resource('/distritos','Geo\DistritoController',['names' => [
         'index' => 'geo.distritos.index',
         'create' => 'geo.distritos.create',
         'update' => 'geo.distritos.update',
@@ -53,7 +53,7 @@ Route::group(['prefix' => 'geo', 'middleware' => ['auth', 'owner']], function ()
         'distritos' => 'distrito'
     ]);
 
-    Route::resource('/localidades','geo\LocalidadController',['names' => [
+    Route::resource('/localidades','Geo\LocalidadController',['names' => [
         'index' => 'geo.localidades.index',
         'create' => 'geo.localidades.create',
         'update' => 'geo.localidades.update',
@@ -65,7 +65,7 @@ Route::group(['prefix' => 'geo', 'middleware' => ['auth', 'owner']], function ()
         'localidades' => 'localidad'
     ]);
 
-    Route::resource('/calles','geo\CalleController',['names' => [
+    Route::resource('/calles','Geo\CalleController',['names' => [
         'index' => 'geo.calles.index',
         'create' => 'geo.calles.create',
         'update' => 'geo.calles.update',
@@ -77,7 +77,7 @@ Route::group(['prefix' => 'geo', 'middleware' => ['auth', 'owner']], function ()
         'calles' => 'calle'
     ]);
 
-    Route::resource('/domicilios','geo\DomicilioController',['names' => [
+    Route::resource('/domicilios','Geo\DomicilioController',['names' => [
         'index' => 'geo.domicilios.index',
         'create' => 'geo.domicilios.create',
         'update' => 'geo.domicilios.update',

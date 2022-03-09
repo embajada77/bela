@@ -6,12 +6,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
-// use Silber\Bouncer\Database\HasRolesAndAbilities;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
+use Bouncer;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-    // use Notifiable, HasRolesAndAbilities;
+    use Notifiable, HasRolesAndAbilities;
 
     /**
      * The attributes that are mass assignable.
@@ -73,31 +73,34 @@ class User extends Authenticatable
         return $this->isAn('owner');
     }
 
-    public function isAn($rol = 'user')
-    {
-        switch ($rol) {
-            case 'owner':
-                return ($this->name === 'xowner');
-                break;
+    // public function isAn($rol = 'user')
+    // {
+    //     switch ($rol) {
+    //         case 'owner':
+    //             // return ($this->name === 'xowner');
+    //             return Bouncer::is($this)->an('owner');
+    //             return $this->isAn('owner');
+    //             break;
 
-            case 'admin':
-                return ($this->isAn('owner') || ($this->name === 'admin'));
-                break;
+    //         case 'admin':
+    //             return (Bouncer::is($this)->an('owner') || Bouncer::is($this)->an('admin'));
+    //             // return ($this->isAn('owner') || ($this->name === 'admin'));
+    //             break;
 
-            case 'organizer':
-                return ($this->name === 'owner');
-                break;
+    //         case 'organizer':
+    //             return ($this->name === 'owner');
+    //             break;
             
-            default:
-                # code...
-                break;
-        }
-    }
+    //         default:
+    //             # code...
+    //             break;
+    //     }
+    // }
 
     // public function getIsAdminAttribute()
     // {
-    //     return ($this->is_owner || ($this->name === 'admin'));
-    //     // return $this->isAn('admin');
+    //     // return ($this->is_owner || ($this->name === 'admin'));
+    //     return $this->isAn('owner') || $this->isAn('admin');
     // }
 
     // public function getIsOwnerAttribute()

@@ -28,7 +28,7 @@ class Owner
 
     protected function authorizedUser()
     {
-        return optional(auth()->user())->is_owner;
+        return optional(auth()->user())->isAn('owner');
         // return (auth()->check() && auth()->user()->is_owner);
     }
 }

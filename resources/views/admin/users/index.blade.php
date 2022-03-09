@@ -1,37 +1,25 @@
 @extends('layouts.app')
 
+@section('breadcrumb')
+    <li class="breadcrumb-item">
+        <a href="{{ route('users.index') }}">
+            Usuarios
+        </a>
+    </li>
+@endsection
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ $title }}</div>
+<div class="row">
+    <div class="col-md-12">
+        <h1>{{ $title }}</h1>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        @can('create',App\User::class)
+        <p><small><a href="">Crear Usuario</a></small></p>
+        @endcan
 
-                    <ul>
-                    @forelse ($users as $user)
-                        <li>
-                            {{ $user->name }} <small>{{ $user->email }} <a href="{{ route('users.show',$user) }}">Detalles</a></small>
-                        </li>
-                    @empty
-                        <li>No hay usuarios Registrados.</li>
-                    @endforelse
-                    </ul>
-
-                    <hr>
-
-                    <a href="{{ route('home') }}"><small>Home</small></a>
-                    /
-                    <a href="{{ route('users.index') }}"><small>Usuarios</small></a>
-                </div>
-            </div>
-        </div>
+        @include('admin.users.index.table',[
+            'users' => $users
+        ])
     </div>
 </div>
 @endsection

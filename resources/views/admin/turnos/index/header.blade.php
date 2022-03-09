@@ -3,9 +3,6 @@
 		<small>#</small>
 	</th>
 	
-	<th class="text-center hidden-xs hidden-sm">
-		<small>CENTRO</small>
-	</th>
 	<th class="text-center">
 		<small data-toggle="tooltip" data-original-title="Fecha de inicio de la turno">INICIO</small>
 	</th>

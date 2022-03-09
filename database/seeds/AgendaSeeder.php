@@ -28,6 +28,7 @@ class AgendaSeeder extends Seeder
 	        $pacientes = Paciente::get();
 	        $tratamientos = Tratamiento::get();
 
+	        /*
 	        $fecha_inicio = $agenda->fecha_inicio;
 	        do {
 
@@ -68,6 +69,7 @@ class AgendaSeeder extends Seeder
 	        		}
 	        	}
 	        } while ( ! $reach_limit);
+	        */
     	});
     }
 }

@@ -31,49 +31,26 @@ $factory->state(Persona::class,'persona_fisica', function(Faker $faker) {
 			break;
 	}
 
-	// $tipos_documentos = TipoDocumento::whereNull('genero_id')
-	// 	->orWhere('genero_id','=',$genero_id)
-	// 	->orWhere('pais_id','=',Pais::ARGENTINA)
-	// 	->get();
-
 	$tipos_documentos = $genero->tiposDocumentos(Pais::ARGENTINA);
 	
 	return [
     	'tipo_documento_id' => $tipos_documentos->random()->id,
     	'nombre' => $nombre,
     	'apellido' => $faker->lastName,
-    	'genero_id' => $genero->id
+    	'genero_id' => $genero->id,
+    	'nacimiento' => $faker->dateTimeBetween('1920-01-01','2014-12-31')
 	];
 });
 
 $factory->state(Persona::class,'persona_juridica', function(Faker $faker) {
 
 	$genero = Genero::find(Genero::PERSONA_JURIDICA);
-
-	// $tipos_documentos = TipoDocumento::where('pais_id','=',Pais::ARGENTINA)
-	// 	->where(function($q) use ($genero_id) {
-	// 		$q->whereNull('genero_id')
-	// 			->orWhere('genero_id','=',$genero_id);
-	// 	})
-	// 	->get();
-
 	$tipos_documentos = $genero->tiposDocumentos(Pais::ARGENTINA);
 	
 	return [
     	'tipo_documento_id' => $tipos_documentos->random()->id,
     	'nombre' => $faker->company,
-    	'genero_id' => $genero->id
+    	'genero_id' => $genero->id,
+    	'nacimiento' => $faker->dateTimeBetween('1920-01-01','2014-12-31')
 	];
 });
-/*
-DELETE FROM empleados;
-DELETE FROM centros;
-DELETE FROM pacientes;
-DELETE FROM personas;
-
-SELECT td.alias, td.nombre, x.nombre, COUNT(p.id)
-FROM personas p
-	LEFT JOIN tipos_documentos td ON td.id = p.tipo_documento_id
-    LEFT JOIN paises x ON x.id = td.pais_id
-GROUP BY td.id
-*/

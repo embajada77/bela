@@ -1,24 +1,30 @@
 <tr class="hover-effect" data-id="{{ $turno->id }}" data-href="{{ route('turnos.show',$turno) }}">
 	<td class="text-center">
-		<small class="text-muted">{{ $loop->iteration }}</small>
+		<small>{{ $loop->iteration }}</small>
 	</td>
 	
 	<td class="text-center">
-		<small class="text-muted">{{ $turno->centro->full_name }}</small>
+		<strong>{{ $turno->hora }}</strong>
 	</td>
 	<td class="text-center">
-		<small class="text-muted">{{ $turno->fecha_inicio }}</small>
+		<small>
+			{{ $turno->hora_fin }}
+			@if ($turno->dias_duracion > 0) 
+				<sup class="text-danger" data-toggle="tooltip" title="El turno termina {{ $turno->dias_duracion }} días despues.">
+					<strong>
+						+{{ $turno->dias_duracion }}
+					</strong>
+				</sup>
+			@endif
+		</small>
 	</td>
 	<td class="text-center">
-		<small class="text-muted">{{ $turno->fecha_fin }}</small>
+		<small>{{ $turno->estado->full_name }}</small>
 	</td>
-	<td class="text-center">
-		<small>{{ optional($turno->estado)->full_name }}</small>
+	<td class="text-left">
+		<strong>{{ $turno->paciente->attrPersona('inverse_minimal_name') }}</strong>
 	</td>
-	<td class="text-center">
-		<strong>{{ optional($turno->paciente)->full_name }}</strong>
-	</td>
-	<td class="text-center">
+	<td class="text-left">
 		<small>{{ $turno->tratamientos->implode('full_name',', ') }}</small>
 	</td>
 
